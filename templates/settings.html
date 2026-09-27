@@ -1,0 +1,66 @@
+<!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Configurações · Bac Bo Monitor Pro</title>
+<style>
+:root{--bg:#080c12;--panel:#0f1620;--panel2:#131d2a;--line:#1d2a3b;--ink:#e8eef6;--mute:#7e8da3;--p:#4c8dff;--ok:#2dd4a0;--bad:#ff6b6b;--font:"Segoe UI Variable Text","Segoe UI",Inter,system-ui,sans-serif}
+*{box-sizing:border-box;margin:0}body{font:14px/1.5 var(--font);color:var(--ink);background:var(--bg);min-height:100vh}
+.wrap{max-width:760px;margin:0 auto;padding:20px 20px 80px}
+header{display:flex;align-items:center;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:20px}header h1{font-size:18px}header a{margin-left:auto;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:7px 14px;border-radius:10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:16px}.card h2{font-size:15px;margin-bottom:4px}.card>p{color:var(--mute);font-size:12.5px;margin-bottom:14px}
+label.f{display:grid;gap:5px;font-size:12.5px;color:var(--mute);margin-bottom:12px}
+input[type=text],input[type=password],select{width:100%;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}input:focus,select:focus{outline:2px solid var(--p);outline-offset:1px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)}.row:first-of-type{border-top:0}.row b{font-weight:600;display:block}.row small{color:var(--mute);font-size:12px}
+.sw{position:relative;width:44px;height:25px;flex:none}.sw input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:1}.sw i{position:absolute;inset:0;border-radius:99px;background:#2a3547;transition:.2s}.sw i::after{content:"";position:absolute;left:3px;top:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:.2s}.sw input:checked+i{background:var(--ok)}.sw input:checked+i::after{transform:translateX(19px)}.sw input:focus-visible+i{outline:2px solid var(--p)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}button{font:inherit;border-radius:10px;padding:9px 18px;cursor:pointer;border:1px solid var(--line);background:var(--panel2);color:var(--ink)}button.pri{background:var(--p);border-color:var(--p);color:#04101f;font-weight:600}
+.msg{margin-top:10px;font-size:12.5px;color:var(--mute);min-height:18px}.hint{font-size:12px;color:var(--mute);margin-top:8px}
+.sticky{position:sticky;bottom:14px;display:flex;justify-content:flex-end;gap:10px;align-items:center}.toast{background:var(--panel);border:1px solid var(--line);padding:9px 14px;border-radius:10px;font-size:13px}
+</style></head><body><div class="wrap">
+<header><svg class="logosvg" viewBox="0 0 48 48" width="42" height="42" role="img" aria-label="Bac Bo Monitor"><defs>
+<linearGradient id="lgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7fb0ff"/><stop offset="1" stop-color="#2b5fd9"/></linearGradient>
+<linearGradient id="lgR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8494"/><stop offset="1" stop-color="#e02f4b"/></linearGradient>
+<linearGradient id="lgT" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd76a"/><stop offset="1" stop-color="#f0a418"/></linearGradient></defs>
+<rect x=".8" y=".8" width="46.4" height="46.4" rx="13" fill="#0b121c" stroke="#26374d"/>
+<path d="M5 36h9l3-6 4 10 4-16 3 12h4" fill="none" stroke="#2dd4a0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+<g transform="rotate(-11 17 27)"><rect x="6" y="16" width="20" height="20" rx="5.5" fill="url(#lgB)"/><circle cx="12" cy="22" r="2" fill="#fff"/><circle cx="16" cy="26" r="2" fill="#fff"/><circle cx="20" cy="30" r="2" fill="#fff"/></g>
+<g transform="rotate(9 32 21)"><rect x="22" y="9" width="20" height="20" rx="5.5" fill="url(#lgR)"/><circle cx="28" cy="15" r="2" fill="#fff"/><circle cx="36" cy="15" r="2" fill="#fff"/><circle cx="28" cy="23" r="2" fill="#fff"/><circle cx="36" cy="23" r="2" fill="#fff"/></g>
+<circle cx="24" cy="41.5" r="2.8" fill="url(#lgT)"/></svg><div><h1>Configurações</h1><div style="color:var(--mute);font-size:12px">Telegram, sinais e cards da interface</div></div><a href="/">← Painel</a></header>
+
+<section class="card"><h2>Telegram</h2><p>Crie o bot no @BotFather e descubra o seu id em @userinfobot. Envie uma mensagem ao bot antes de testar. As credenciais ficam só no config.json deste computador.</p>
+<label class="f">Token do bot<input type="password" id="tok" autocomplete="off" placeholder="123456:ABC…"><span id="tokHint"></span></label>
+<label class="f">Chat ID<input type="text" id="chat" inputmode="numeric" placeholder="ex.: 123456789"></label>
+<div class="row"><div><b>Enviar sinais de entrada e resultados</b><small>Possível entrada, green/red e estatísticas</small></div><label class="sw"><input type="checkbox" id="telegram_signals"><i></i></label></div>
+<div class="row"><div><b>Enviar todas as rodadas</b><small>Desligado por padrão: o Telegram fica só com entrada e resultado</small></div><label class="sw"><input type="checkbox" id="telegram_all_rounds"><i></i></label></div>
+<div class="row"><div><b>Avisar "a analisar padrão"</b><small>Manda uma mensagem quando falta 1 rodada para confirmar a entrada, para dar tempo de se preparar</small></div><label class="sw"><input type="checkbox" id="telegram_pre_alert"><i></i></label></div>
+<div class="btns"><button class="pri" id="saveTg">Guardar Telegram</button><button id="test">Enviar teste</button><button id="clr">Apagar token</button></div><div class="msg" id="tgMsg"></div></section>
+
+<section class="card"><h2>Link do celular</h2><p>Para manter o mesmo link após reiniciar, use um Cloudflare Tunnel nomeado com um domínio fixo. O endereço <code>trycloudflare.com</code> é temporário e muda a cada arranque.</p>
+<label class="f">URL pública fixa<input type="text" id="tunnel_url" placeholder="https://painel.seudominio.com"></label>
+<label class="f">Token do Cloudflare Tunnel<input type="password" id="cf_token" autocomplete="off" placeholder="eyJhIjoi…"><span id="cfHint"></span></label>
+<div class="btns"><button class="pri" id="saveTunnel">Guardar link</button></div><div class="msg" id="tunnelMsg"></div></section>
+
+<section class="card"><h2>Sinais e gale</h2><p>O gale só é indicado quando o histórico deste padrão mostra poucas perdas seguidas. Gale dobra a aposta: G1 arrisca 3 unidades e G2 arrisca 7 para ganhar 1. Não reduz o risco.</p>
+<div class="row"><div><b>Sinais dos padrões fixos do sistema</b><small>Desligado (padrão): só os "Meus padrões" que você cria no construtor geram entrada, pré-aviso e Telegram. Os 9 padrões fixos ficam só como estatística de referência. Ligue aqui se também quiser entradas automáticas deles.</small></div><label class="sw"><input type="checkbox" id="engine_signals"><i></i></label></div>
+<div class="row"><div><b>Empate conta como green</b><small>Entrada protegida no Tie (Player/Banker + Tie)</small></div><label class="sw"><input type="checkbox" id="tie_as_green"><i></i></label></div>
+<label class="f" style="margin-top:12px">Gale máximo permitido<select id="max_gale"><option value="0">Desligado</option><option value="1">Até G1</option><option value="2">Até G2 (quando viável)</option></select></label>
+<div class="btns"><button class="pri" id="saveSg">Guardar sinais</button></div><div class="msg" id="sgMsg"></div></section>
+
+<section class="card"><h2>Cards da interface</h2><p>Desligue o que não quer ver no painel. Fica guardado neste navegador e aplica-se na hora.</p><div id="cards"></div>
+<div class="row"><div><b>Ecrã cheio de entrada e resultado</b><small>Se desligar, os sinais continuam no header e no Telegram</small></div><label class="sw"><input type="checkbox" id="ovl"><i></i></label></div>
+<div class="btns"><button id="showAll">Mostrar todos</button></div></section>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const CARDS=[['entry','Entrada (destaque)','Card fixo com o sinal atual e os pré-avisos "a analisar padrão"'],['stage','Última rodada','Player, Banker, Tie e barra das últimas 20'],['road','Road das últimas rodadas','Grelha de bolas'],['engine','Motor adaptativo','Mesa, forma dos padrões e validação'],['strat','Histórico por padrão','Tabela de green/red de todo o histórico'],['tools','Ferramentas','Laboratório, horários, inspetor, Telegram'],['sent','Sentimento do mercado',''],['dist','Distribuição','Gráfico de rosca'],['obs','Observado vs. teórico',''],['seq','Sequências',''],['note','Aviso de independência','']];
+let PR={hidden:[],overlay:true};try{PR=Object.assign(PR,JSON.parse(localStorage.getItem('bbprefs')||'{}'))}catch(_){}
+const sv=()=>localStorage.setItem('bbprefs',JSON.stringify(PR));
+function draw(){$('#cards').innerHTML=CARDS.map(([id,n,d])=>`<div class="row"><div><b>${n}</b><small>${d}</small></div><label class="sw"><input type="checkbox" data-id="${id}" ${PR.hidden.includes(id)?'':'checked'}><i></i></label></div>`).join('');
+ document.querySelectorAll('[data-id]').forEach(c=>c.onchange=()=>{PR.hidden=PR.hidden.filter(x=>x!==c.dataset.id);if(!c.checked)PR.hidden.push(c.dataset.id);sv()});$('#ovl').checked=PR.overlay}
+$('#ovl').onchange=e=>{PR.overlay=e.target.checked;sv()};$('#showAll').onclick=()=>{PR.hidden=[];sv();draw()};draw();
+async function post(o){const r=await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)});return r.json()}
+async function load(){const d=await (await fetch('/api/settings')).json();$('#chat').value=d.telegram_chat_id||'';$('#tokHint').textContent=d.has_token?'Token guardado ('+d.token_hint+'). Deixe em branco para manter.':'Nenhum token guardado.';
+ for(const k of ['telegram_signals','telegram_all_rounds','telegram_pre_alert','tie_as_green','engine_signals'])$('#'+k).checked=!!d[k];$('#max_gale').value=d.max_gale;$('#tunnel_url').value=d.tunnel_url||'';$('#cfHint').textContent=d.has_cf_token?'Token guardado. Deixe em branco para manter.':'Nenhum token guardado.'}
+$('#saveTg').onclick=async()=>{const r=await post({telegram_token:$('#tok').value,telegram_chat_id:$('#chat').value,telegram_signals:$('#telegram_signals').checked,telegram_all_rounds:$('#telegram_all_rounds').checked,telegram_pre_alert:$('#telegram_pre_alert').checked});$('#tgMsg').textContent=(r.ok?'✅ ':'⚠️ ')+r.msg;$('#tok').value='';load()};
+$('#clr').onclick=async()=>{if(!confirm('Apagar o token guardado?'))return;const r=await post({clear_token:true});$('#tgMsg').textContent=r.msg;load()};
+$('#test').onclick=async()=>{$('#tgMsg').textContent='A enviar…';const d=await (await fetch('/api/telegram/test',{method:'POST'})).json();$('#tgMsg').textContent=(d.ok?'✅ ':'⚠️ ')+d.msg};
+$('#saveSg').onclick=async()=>{const r=await post({tie_as_green:$('#tie_as_green').checked,max_gale:+$('#max_gale').value,engine_signals:$('#engine_signals').checked});$('#sgMsg').textContent=(r.ok?'✅ ':'⚠️ ')+r.msg};
+$('#saveTunnel').onclick=async()=>{const r=await post({tunnel_url:$('#tunnel_url').value,cloudflare_tunnel_token:$('#cf_token').value});$('#tunnelMsg').textContent=(r.ok?'Guardado. Reinicie o sistema para aplicar o túnel.':'⚠️ '+r.msg);$('#cf_token').value='';load()};
+load();
+</script></body></html>
