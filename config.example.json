@@ -1,0 +1,18 @@
+{
+  "poll_seconds": 2,
+  "history_newest_first": true,
+  "telegram_token": "",
+  "telegram_chat_id": "",
+  "telegram_all_rounds": true,
+  "telegram_signals": true,
+  "telegram_pre_alert": true,
+  "engine_signals": false,
+  "streak_alert": 4,
+  "tie_payout": 5,
+  "tie_pushes_pb": true,
+  "history_limit": 200,
+  "reset_on_start": true,
+  "tunnel": true,
+  "tunnel_url": "",
+  "cloudflare_tunnel_token": ""
+}

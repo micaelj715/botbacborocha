@@ -1,0 +1,21 @@
+# Ambiente virtual Python (não faz sentido versionar; o Railway instala
+# as dependências sozinho a partir do requirements.txt)
+.venv/
+__pycache__/
+*.pyc
+
+# Binário do túnel (Windows only; não roda no Railway, que já dá URL pública)
+cloudflared.exe
+cloudflared
+
+# Dados/segredos locais — NÃO subir para um repositório público
+config.json
+access_key.txt
+bacbo.db
+signals.json
+telegram_stats.json
+custom.json
+
+# Extras comuns de OS/editor
+.DS_Store
+Thumbs.db
