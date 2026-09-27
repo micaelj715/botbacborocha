@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080c12">
+<title>Meus padrões · Bac Bo</title>
+<style>
+:root{--bg:#080c12;--panel:#0f1620;--panel2:#131d2a;--line:#1d2a3b;--ink:#e8eef6;--mute:#7e8da3;--p:#4c8dff;--b:#ff5468;--t:#f5b73b;--ok:#2dd4a0;--bad:#ff6b6b;
+--font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font:15px/1.5 var(--font);color:var(--ink);min-height:100vh;padding:max(16px,env(safe-area-inset-top)) 16px 60px;background:radial-gradient(700px 360px at 10% -8%,#12244455,transparent),var(--bg)}
+.wrap{max-width:760px;margin:0 auto;display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.wrap>*,.card,.fr>*{min-width:0}
+.seg{flex-wrap:wrap}
+header{padding:4px 2px}.back{color:var(--mute);text-decoration:none;font-size:13px}
+h1{font-size:24px;letter-spacing:-.5px;margin-top:6px}header p{color:var(--mute);font-size:13.5px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px}
+h2{font-size:13px;font-weight:600;color:var(--mute);margin:0 0 12px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+h2 b{color:var(--ink);font-size:15px}h2 small{font-weight:400;font-size:12px}
+.step+.step{margin-top:22px}
+.tpls{display:flex;gap:8px;flex-wrap:wrap}
+.tpl{display:flex;align-items:center;gap:5px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--ink);cursor:pointer;font:inherit;font-size:13px;transition:transform .15s,border-color .2s}
+.tpl:hover{border-color:var(--p)}.tpl:active{transform:scale(.95)}
+.d{width:24px;height:24px;border-radius:50%;background:var(--c);display:inline-grid;place-items:center;font-size:11px;font-weight:800;color:#06101d;flex:none}
+.d.eq{background:#2a3547;color:var(--ink)}
+.seq{display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-height:64px;padding:10px 12px;background:var(--panel2);border:1px dashed #2a3a52;border-radius:14px}
+.slot{width:48px;height:48px;border-radius:50%;border:0;background:var(--c);color:#06101d;font:800 15px var(--font);cursor:pointer;box-shadow:0 0 0 0 var(--c);animation:pop .35s cubic-bezier(.3,1.6,.5,1);transition:transform .15s}
+.slot:active{transform:scale(.88)}
+.slot.any{color:var(--ink)}
+.arr{color:var(--mute);font-size:18px}
+.res{display:flex;align-items:center;gap:8px;margin-left:auto;padding:6px 6px 6px 12px;border-radius:999px;background:#0b1220;border:1px solid var(--line);font-size:12px;color:var(--mute)}
+.res .d{width:34px;height:34px;font-size:14px}
+.ph{color:var(--mute);font-size:13px}
+@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+.pal{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.pb{display:grid;justify-items:center;gap:4px;background:none;border:0;color:var(--mute);font:inherit;font-size:11.5px;cursor:pointer}
+.pb i{width:52px;height:52px;border-radius:50%;background:var(--c);display:block;transition:transform .15s,box-shadow .2s;box-shadow:0 6px 18px -6px var(--c)}
+.pb:hover i{transform:translateY(-2px)}.pb:active i{transform:scale(.88)}
+.mini{background:var(--panel2);border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:9px 13px;font:inherit;font-size:13px;cursor:pointer}
+.bets{display:flex;gap:8px;flex-wrap:wrap}
+.bet{display:flex;align-items:center;gap:8px;background:var(--panel2);border:2px solid var(--line);border-radius:14px;padding:9px 14px;color:var(--ink);cursor:pointer;font:inherit;font-size:13.5px;transition:all .2s}
+.bet.on{border-color:var(--c,var(--p));background:color-mix(in srgb,var(--c,var(--p)) 14%,var(--panel2));transform:translateY(-1px)}
+.seg{display:inline-flex;background:var(--panel2);border-radius:10px;padding:3px;gap:2px}
+.seg button{background:none;border:0;color:var(--mute);font:inherit;padding:7px 16px;border-radius:8px;cursor:pointer}
+.seg button.on{background:var(--line);color:var(--ink)}
+input[type=text]{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;color:var(--ink);font:inherit;margin-top:6px}
+.prev{margin-top:18px;padding:14px;background:#0b1220;border:1px solid var(--line);border-radius:14px}
+.prev .k{font-size:12px;color:var(--mute);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tile{background:var(--panel2);border-radius:10px;padding:9px 10px}.tile small{display:block;color:var(--mute);font-size:11px}.tile b{font-size:20px;font-variant-numeric:tabular-nums}
+.g{color:var(--ok)}.r{color:var(--bad)}
+.badge{font-size:11.5px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.badge.up{color:var(--ok);border-color:#2dd4a066}.badge.dn{color:var(--bad);border-color:#ff6b6b66}
+.ratio{display:flex;height:8px;border-radius:5px;overflow:hidden;background:var(--panel2);margin-top:10px}.ratio i{display:block;height:100%;transition:width .6s}
+.note{font-size:12px;color:var(--mute);margin-top:10px;line-height:1.5}
+.actions{display:flex;gap:10px;margin-top:16px}
+.go{background:var(--p);color:#04101f;border:0;border-radius:12px;padding:13px 22px;font:700 15px var(--font);cursor:pointer;flex:1;transition:transform .15s,filter .2s}
+.go:hover{filter:brightness(1.1)}.go:active{transform:scale(.97)}.go:disabled{opacity:.4;cursor:not-allowed}
+.go.ghost{background:var(--panel2);color:var(--ink);border:1px solid var(--line);flex:none}
+.item{display:grid;gap:10px;padding:14px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;transition:border-color .3s,box-shadow .3s}
+.item+.item{margin-top:10px}.item.off{opacity:.55}
+.item.act{border-color:var(--c);box-shadow:0 0 30px -8px var(--c);animation:glow 1.6s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 36px -2px var(--c)}}
+.row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.row .sp{flex:1}
+.item .nm{font-weight:650;font-size:14px}
+.stat{font-size:12.5px;color:var(--mute);display:flex;gap:12px;flex-wrap:wrap;align-items:center}.stat b{color:var(--ink)}
+.now{font-weight:700;color:var(--c);display:flex;gap:8px;align-items:center}
+.now i{width:9px;height:9px;border-radius:50%;background:var(--c);animation:pulse 1.2s infinite;--k:color-mix(in srgb,var(--c) 60%,transparent)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--k)}100%{box-shadow:0 0 0 10px transparent}}
+.ic{background:none;border:1px solid var(--line);color:var(--mute);border-radius:9px;padding:6px 10px;cursor:pointer;font:inherit;font-size:12.5px}
+.ic:hover{color:var(--ink)}
+.sw{width:42px;height:24px;border-radius:999px;background:#2a3547;border:0;position:relative;cursor:pointer;transition:background .2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw.on{background:var(--ok)}.sw.on::after{transform:translateX(18px)}
+.pill{font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px}.pill.g{background:#2dd4a022}.pill.r{background:#ff6b6b22}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,30px);opacity:0;background:var(--ok);color:#04101f;padding:11px 20px;border-radius:12px;font-weight:700;transition:all .35s;z-index:9}
+.toast.show{transform:translate(-50%,0);opacity:1}.toast.err{background:var(--bad)}
+.empty{color:var(--mute);text-align:center;padding:22px 10px;font-size:13.5px}
+.filt{display:grid;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fr{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;background:var(--panel2);flex-wrap:wrap}
+.fr+.fr{border-top:1px solid var(--line)}.fr.sub{background:#0e1622;padding:10px 14px;gap:18px}
+.ft b{font-size:13.5px;display:block}.ft small{color:var(--mute);font-size:12px;line-height:1.4;display:block;max-width:330px}
+.ctl{display:flex;gap:8px;align-items:center;color:var(--mute);font-size:12.5px;flex-wrap:wrap}
+.lbl{color:var(--mute);font-size:12px;display:flex;align-items:center;gap:8px}
+select{background:#0b1220;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;font-size:13px}
+.seg.sm button{padding:5px 11px;font-size:12.5px}
+.chipx{display:inline-flex;gap:6px;align-items:center;font-size:12px;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 11px}
+.plate{display:grid;grid-template-columns:repeat(20,1fr);grid-template-rows:repeat(6,1fr);grid-auto-flow:column;gap:4px;margin:12px 0;padding:10px;background:#0b1220;border:1px solid var(--line);border-radius:14px}
+.pc{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:8.5px;font-weight:800;color:#06101d;background:var(--c);transition:transform .25s,box-shadow .25s,opacity .25s}
+.pc.e{background:#141d2a;border:1px dashed #253449}
+.plate.ov .pc{opacity:.28}.plate.ov .pc.e{opacity:.4}
+.plate.ov .pc.pat{opacity:1;box-shadow:0 0 0 2px #a78bfa}
+.plate.ov .pc.gl{opacity:1;box-shadow:0 0 0 2px var(--t)}
+.plate.ov .pc.hit{opacity:1;box-shadow:0 0 0 3px var(--ok);transform:scale(1.14);z-index:1}
+.plate.ov .pc.miss{opacity:1;box-shadow:0 0 0 3px var(--bad);transform:scale(1.14);z-index:1}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mute)}.lg i{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px solid var(--c);margin-right:5px;vertical-align:-2px}
+.rk{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:11px 12px;background:var(--panel2);border:2px solid transparent;border-radius:13px;cursor:pointer;transition:border-color .2s,transform .15s}
+.rk+.rk{margin-top:8px}.rk:hover{transform:translateX(2px)}.rk.on{border-color:#a78bfa}
+.rk .md{font-size:20px;text-align:center}.rk .mn{font-size:13px;display:flex;gap:5px;align-items:center;flex-wrap:wrap}.rk .mn span.nm{margin-left:4px;font-weight:600}
+.rk .sm{font-size:11.5px;color:var(--mute);margin-top:3px}.rk .bar{height:5px;background:#0b1220;border-radius:3px;margin-top:6px;overflow:hidden}.rk .bar i{display:block;height:100%;background:linear-gradient(90deg,#a78bfa,var(--ok));transition:width .6s}
+.rk .pc2{font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;text-align:right}.rk .pc2 small{display:block;font-size:10.5px;color:var(--mute);font-weight:400}
+@media(max-width:520px){.tiles{grid-template-columns:repeat(2,1fr)}.slot{width:44px;height:44px}.res{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a class="back" href="/">← Voltar ao painel</a><h1>Meus padrões</h1><p>Monte a sequência com bolinhas, escolha onde entrar e veja como ela teria ido no histórico.</p></header>
+
+<section class="card">
+  <h2><b>Começar por um modelo</b><small>toque para carregar e depois ajuste</small></h2>
+  <div class="tpls" id="tpls"></div>
+</section>
+
+<section class="card">
+  <div class="step">
+    <h2><b>1 · Quando saírem estas cores</b><small>da mais antiga para a mais recente. Toque numa bolinha para trocar a cor</small></h2>
+    <div class="seq" id="seq"></div>
+    <div class="pal">
+      <button class="pb" data-k="P" style="--c:var(--p)"><i></i>Player</button>
+      <button class="pb" data-k="B" style="--c:var(--b)"><i></i>Banker</button>
+      <button class="pb" data-k="T" style="--c:var(--t)"><i></i>Tie</button>
+      <button class="pb" data-k="*" style="--c:#3a475c"><i></i>Qualquer</button>
+      <span style="flex:1"></span>
+      <button class="mini" id="undo">⌫ Apagar última</button><button class="mini" id="clear">Limpar</button>
+    </div>
+  </div>
+  <div class="step">
+    <h2><b>2 · Então entrar em</b></h2>
+    <div class="bets" id="bets"></div>
+  </div>
+  <div class="step">
+    <h2><b>3 · Gale</b><small>tentativas extras se a primeira falhar</small></h2>
+    <div class="seg" id="gale"></div>
+    <input type="text" id="name" maxlength="40" placeholder="Nome do padrão (opcional)">
+  </div>
+  <div class="step" id="filt">
+    <h2><b>4 · Filtros e proteções</b><small>definem quando NÃO entrar</small><button class="mini" id="presetSafe" style="margin-left:auto">Aplicar recomendado</button></h2>
+    <div class="filt">
+      <div class="fr"><div class="ft"><b>Tendência</b><small>Compara a entrada com o lado que mais saiu nas últimas rodadas.</small></div><div class="seg sm" id="fTrend"></div></div>
+      <div class="fr sub" id="fTrendO"><span class="lbl">Olhar as últimas<span class="seg sm" id="fTw"></span></span><span class="lbl">Força mínima<span class="seg sm" id="fTs"></span></span></div>
+      <div class="fr"><div class="ft"><b>Ritmo da mesa</b><small>“Em sequências” = lados repetem. “Alternando” = lados se trocam.</small></div><div class="seg sm" id="fRh"></div></div>
+      <div class="fr"><div class="ft"><b>Pausar após reds seguidos</b><small>Para de entrar depois de uma série de reds.</small></div><div class="ctl"><select id="fStop"><option value="0">Desligado</option><option value="2">2 reds</option><option value="3">3 reds</option><option value="4">4 reds</option><option value="5">5 reds</option></select>por<select id="fPause"><option value="5">5</option><option value="10">10</option><option value="20">20</option><option value="30">30</option></select>rodadas</div></div>
+      <div class="fr"><div class="ft"><b>Intervalo entre entradas</b><small>Rodadas de espera depois de cada entrada.</small></div><select id="fCool"><option value="0">Sem intervalo</option><option value="1">1 rodada</option><option value="2">2 rodadas</option><option value="3">3 rodadas</option><option value="5">5 rodadas</option><option value="10">10 rodadas</option></select></div>
+      <div class="fr"><div class="ft"><b>Horário</b><small>Só entra dentro desta janela (hora de Cabo Verde).</small></div><div class="ctl"><select id="fH0"></select>até<select id="fH1"></select></div></div>
+    </div>
+  </div>
+  <div class="prev" id="prev"></div>
+  <div class="actions"><button class="go" id="save">Salvar padrão</button><button class="go ghost" id="cancel" hidden>Cancelar</button></div>
+</section>
+
+<section class="card">
+  <h2><b>Escala 20×6</b><small>últimas 120 rodadas, coluna a coluna · qual padrão encaixa melhor</small></h2>
+  <div class="row" id="mkt" style="gap:8px;margin-bottom:2px"></div>
+  <div class="plate" id="plate"></div>
+  <div class="lg"><span style="--c:#a78bfa"><i></i>padrão</span><span style="--c:var(--t)"><i></i>gale</span><span style="--c:var(--ok)"><i></i>green</span><span style="--c:var(--bad)"><i></i>red</span></div>
+  <div id="rank" style="margin-top:14px"></div>
+  <div class="note">O ranking usa só as 120 rodadas da escala e penaliza padrões com poucas entradas. Encaixar bem numa amostra pequena não garante que continue: use como guia, não como certeza.</div>
+</section>
+
+<section class="card">
+  <h2><b>Meus padrões</b><small id="cnt"></small></h2>
+  <div id="list"><div class="empty">Ainda não criou nenhum padrão.</div></div>
+</section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const C={P:['var(--p)','Player'],B:['var(--b)','Banker'],T:['var(--t)','Tie'],'*':['#3a475c','Qualquer']};
+const NM={PLAYER:'P',BANKER:'B',TIE:'T'},NAME={P:'Player',B:'Banker',T:'Tie'};
+const CYC=['P','B','T','*'];
+const F0=()=>({trend:'off',tw:20,ts:55,rhythm:'any',stop:0,pause:10,cool:0,h0:null,h1:null});
+let st={pat:[],bet:'B',gale:0,name:'',id:null,f:F0()},pt=null,SC={cells:[],n:0,since:0},SEL=null,LASTPREV=null;
+const dot=(k,x='')=>`<span class="d ${x}" style="--c:${C[k][0]}">${k==='*'?'?':k}</span>`;
+const betDot=b=>b==='same'?'<span class="d eq">＝</span>':b==='opp'?'<span class="d eq">≠</span>':dot(b);
+const betTxt=b=>b==='same'?'Mesmo do último':b==='opp'?'Oposto do último':NAME[b];
+const TPL=[
+ {n:'3 Banker → Player',pat:['B','B','B'],bet:'P'},{n:'3 Player → Banker',pat:['P','P','P'],bet:'B'},
+ {n:'Alternância',pat:['P','B','P'],bet:'B'},{n:'Dois a dois',pat:['P','P','B','B'],bet:'P'},
+ {n:'Após Tie, repete',pat:['T','*'],bet:'same'},{n:'4 iguais → oposto',pat:['B','B','B','B'],bet:'P'}];
+$('#tpls').innerHTML=TPL.map((t,i)=>`<button class="tpl" data-i="${i}">${t.pat.map(k=>dot(k)).join('')}<span>→</span>${betDot(t.bet)}</button>`).join('');
+$('#tpls').onclick=e=>{const b=e.target.closest('.tpl');if(!b)return;const t=TPL[+b.dataset.i];st={...st,pat:[...t.pat],bet:t.bet,gale:0,name:'',id:null,f:F0()};$('#name').value='';draw();scrollTo({top:$('#seq').offsetTop-80,behavior:'smooth'})};
+
+function draw(){
+  const q=$('#seq');
+  q.innerHTML=st.pat.length?st.pat.map((k,i)=>`${i?'<span class="arr">›</span>':''}<button class="slot ${k==='*'?'any':''}" data-i="${i}" style="--c:${C[k][0]}">${k==='*'?'?':k}</button>`).join('')+
+   `<span class="res">entrar<span>→</span>${betDot(st.bet)}</span>`:'<span class="ph">Toque nas cores abaixo para começar…</span>';
+  $('#bets').innerHTML=['P','B','T','same','opp'].map(b=>`<button class="bet ${st.bet===b?'on':''}" data-b="${b}" style="--c:${b==='same'||b==='opp'?'var(--ok)':C[b][0]}">${betDot(b)}${betTxt(b)}</button>`).join('');
+  $('#gale').innerHTML=[0,1,2].map(g=>`<button class="${st.gale===g?'on':''}" data-g="${g}">${g?'G'+g:'Sem gale'}</button>`).join('');
+  $('#save').textContent=st.id?'Guardar alterações':'Salvar padrão';$('#cancel').hidden=!st.id;
+  drawF();preview();
+}
+$('.pal').onclick=e=>{const b=e.target.closest('.pb');if(b&&st.pat.length<8){st.pat.push(b.dataset.k);draw()}};
+$('#seq').onclick=e=>{const b=e.target.closest('.slot');if(!b)return;const i=+b.dataset.i;st.pat[i]=CYC[(CYC.indexOf(st.pat[i])+1)%4];draw()};
+$('#undo').onclick=()=>{st.pat.pop();draw()};$('#clear').onclick=()=>{st.pat=[];draw()};
+$('#bets').onclick=e=>{const b=e.target.closest('.bet');if(b){st.bet=b.dataset.b;draw()}};
+$('#gale').onclick=e=>{const b=e.target.closest('button');if(b){st.gale=+b.dataset.g;draw()}};
+$('#name').oninput=e=>st.name=e.target.value;
+
+function preview(){
+  const el=$('#prev');
+  if(!st.pat.length){el.innerHTML='<div class="k">Teste no histórico</div><div class="ph">Monte o padrão para ver como ele teria ido nas últimas rodadas.</div>';return}
+  clearTimeout(pt);pt=setTimeout(async()=>{
+    try{const r=await fetch('/api/custom/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pattern:st.pat,bet:st.bet,gale:st.gale,f:st.f})});const d=await r.json();LASTPREV=d;drawPlate();drawRank();
+      const v=d.verdict==='acima do acaso'?'up':d.verdict==='abaixo do acaso'?'dn':'';
+      el.innerHTML=`<div class="k"><span>Teste no histórico (${d.n} rodadas)</span><span class="badge ${v}">${d.verdict}</span></div>`+
+       (d.entries?`<div class="tiles"><div class="tile"><small>Entradas</small><b>${d.entries}</b></div><div class="tile"><small>Green</small><b class="g">${d.g+d.t}</b></div><div class="tile"><small>Red</small><b class="r">${d.r}</b></div><div class="tile"><small>Acerto</small><b>${d.hit.toFixed(0)}%</b></div></div>
+       <div class="ratio"><i style="width:${(d.g+d.t)/d.entries*100}%;background:var(--ok)"></i><i style="width:${d.r/d.entries*100}%;background:var(--bad)"></i></div>
+       ${d.blocked?`<div class="note">🛡 Os filtros bloquearam <b>${d.blocked}</b> ocorrência(s) deste padrão.</div>`:''}<div class="note">Só pelo acaso, este tipo de entrada acertaria cerca de <b>${d.p0.toFixed(0)}%</b>. Poucas entradas dão resultados enganadores: confie mais num padrão com muitas ocorrências.</div>`
+       :`<div class="ph">Este padrão ainda não apareceu no histórico carregado. Pode salvar na mesma e ele passa a ser vigiado ao vivo.</div>`)}catch(e){}
+  },220);
+}
+function toast(t,err){const e=$('#toast');e.textContent=t;e.className='toast show'+(err?' err':'');setTimeout(()=>e.className='toast',2200)}
+$('#save').onclick=async()=>{
+  const r=await fetch('/api/custom',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:st.id,name:st.name,pattern:st.pat,bet:st.bet,gale:st.gale,f:st.f})});const d=await r.json();
+  if(!r.ok){toast(d.error||'Erro',true);return}
+  toast(st.id?'Alterações guardadas ✓':'Padrão salvo ✓');st={pat:[],bet:'B',gale:0,name:'',id:null,f:F0()};$('#name').value='';draw();load();
+};
+$('#cancel').onclick=()=>{st={pat:[],bet:'B',gale:0,name:'',id:null,f:F0()};$('#name').value='';draw()};
+
+async function load(){
+  try{const L=await (await fetch('/api/custom')).json();$('#cnt').textContent=L.length?L.length+' de 20':'';
+    $('#list').innerHTML=L.length?L.map(c=>{
+      const a=c.active&&c.on,col=a?(c.active.bet==='PLAYER'?'var(--p)':c.active.bet==='BANKER'?'var(--b)':'var(--t)'):'var(--line)';
+      const v=c.verdict==='acima do acaso'?'up':c.verdict==='abaixo do acaso'?'dn':'';
+      const jl=c.last&&c.last.i===c.n-1&&c.on?`<span class="pill ${c.last.res==='r'?'r':'g'}" style="color:var(--${c.last.res==='r'?'bad':'ok'})">${c.last.res==='r'?'RED':'GREEN'}</span>`:'';
+      return `<div class="item ${a?'act':''} ${c.on?'':'off'}" style="--c:${col}">
+        <div class="row">${c.pattern.map(k=>dot(k)).join('')}<span style="color:var(--mute)">→</span>${betDot(c.bet)}<span class="sp"></span>${jl}<button class="sw ${c.on?'on':''}" data-t="${c.id}" aria-label="Ativar"></button></div>
+        <div class="row"><span class="nm">${c.name}</span>${c.gale?`<span class="badge">G${c.gale}</span>`:''}<span class="badge ${v}">${c.verdict}</span></div>
+        ${a?`<div class="now"><i></i>ENTRAR NO ${c.active.bet==='PLAYER'?'PLAYER':c.active.bet==='BANKER'?'BANKER':'TIE'}${c.active.lvl?' · GALE '+c.active.lvl:''}</div>`:''}
+        <div class="stat"><span><b>${c.entries}</b> entradas</span><span class="g"><b>${c.g+c.t}</b> green</span><span class="r"><b>${c.r}</b> red</span><span><b>${c.hit==null?'—':c.hit.toFixed(0)+'%'}</b> acerto</span><span><b>${c.run}</b> seguidos</span>${c.blocked?`<span>🛡 <b>${c.blocked}</b> bloqueadas</span>`:''}</div>${fb(c.f)}
+        <div class="row"><span class="sp"></span><button class="ic" data-e="${c.id}">Editar</button><button class="ic" data-x="${c.id}">Apagar</button></div></div>`}).join(''):'<div class="empty">Ainda não criou nenhum padrão.</div>';
+    window._L=L;try{SC=await (await fetch('/api/scale')).json()}catch(e){}drawMkt();drawPlate();drawRank();
+  }catch(e){}
+}
+$('#list').onclick=async e=>{
+  const t=e.target.closest('[data-t]'),x=e.target.closest('[data-x]'),ed=e.target.closest('[data-e]');
+  if(t){await fetch('/api/custom/'+t.dataset.t+'/toggle',{method:'POST'});load()}
+  if(x&&confirm('Apagar este padrão?')){await fetch('/api/custom/'+x.dataset.x,{method:'DELETE'});load()}
+  if(ed){const c=window._L.find(z=>z.id===ed.dataset.e);st={pat:[...c.pattern],bet:c.bet,gale:c.gale,name:c.name,id:c.id,f:{...F0(),...c.f}};$('#name').value=c.name;draw();scrollTo({top:0,behavior:'smooth'})}
+};
+
+/* ===== filtros ===== */
+const seg=(k,o,v)=>o.map(([x,l])=>`<button data-k="${k}" data-v="${x}" class="${String(v)===String(x)?'on':''}">${l}</button>`).join('');
+const hopt='<option value="">Sempre</option>'+Array.from({length:24},(_,h)=>`<option value="${h}">${h}h</option>`).join('');
+$('#fH0').innerHTML=hopt;$('#fH1').innerHTML=hopt;
+function drawF(){
+  const f=st.f;
+  $('#fTrend').innerHTML=seg('trend',[['off','Sem filtro'],['not_against','Não contra'],['with','Só a favor']],f.trend);
+  $('#fTw').innerHTML=seg('tw',[[10,'10'],[20,'20'],[30,'30']],f.tw);$('#fTs').innerHTML=seg('ts',[[55,'55%'],[60,'60%'],[65,'65%']],f.ts);
+  $('#fRh').innerHTML=seg('rhythm',[['any','Qualquer'],['seq','Em sequências'],['alt','Alternando']],f.rhythm);
+  $('#fTrendO').style.display=(f.trend==='off'&&f.rhythm==='any')?'none':'flex';
+  $('#fStop').value=f.stop;$('#fPause').value=f.pause;$('#fCool').value=f.cool;
+  $('#fH0').value=f.h0==null?'':f.h0;$('#fH1').value=f.h1==null?'':f.h1;
+}
+$('#filt').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(b){const v=b.dataset.v;st.f[b.dataset.k]=isNaN(+v)?v:+v;draw()}});
+[['fStop','stop'],['fPause','pause'],['fCool','cool']].forEach(([id,k])=>$('#'+id).onchange=e=>{st.f[k]=+e.target.value;preview()});
+['fH0','fH1'].forEach(id=>$('#'+id).onchange=()=>{const a=$('#fH0').value,b=$('#fH1').value;const ok=a!==''&&b!=='';st.f.h0=ok?+a:null;st.f.h1=ok?+b:null;preview()});
+$('#presetSafe').onclick=()=>{st.f={...st.f,trend:'not_against',tw:20,ts:55,stop:3,pause:10};draw();toast('Filtros recomendados aplicados')};
+function fb(f){if(!f)return'';const o=[];if(f.trend==='not_against')o.push('Não contra a tendência');if(f.trend==='with')o.push('Só a favor da tendência');
+  if(f.rhythm==='seq')o.push('Mesa em sequências');if(f.rhythm==='alt')o.push('Mesa alternando');if(f.stop)o.push('Pausa após '+f.stop+' reds');if(f.cool)o.push('Intervalo '+f.cool);
+  if(f.h0!=null)o.push(f.h0+'h–'+f.h1+'h');return o.length?`<div class="row">${o.map(x=>`<span class="chipx">${x}</span>`).join('')}</div>`:''}
+
+/* ===== escala 20x6 ===== */
+function drawMkt(){
+  const t=SC.trend||{},r={seq:'Mesa em sequências',alt:'Mesa alternando',mix:'Mesa mista'}[SC.rhythm]||'';
+  $('#mkt').innerHTML=`<span class="chipx">${t.side?`Tendência (20): <b>${t.side==='PLAYER'?'Player':'Banker'} ${t.share}%</b>`:'Sem tendência clara'}</span><span class="chipx">${r}</span><span class="chipx">${SC.n} rodadas carregadas</span>`;
+}
+function selObj(){return SEL==='draft'?(LASTPREV&&st.pat.length?{...LASTPREV,pattern:st.pat}:null):(window._L||[]).find(c=>c.id===SEL)}
+function drawPlate(){
+  const cells=SC.cells||[],o=selObj(),k=o?o.pattern.length:0,cls=new Array(120).fill('');
+  if(o&&o.sc)o.sc.marks.forEach(m=>{for(let x=m.s-k;x<m.s;x++)if(x>=0)cls[x]+=' pat';for(let x=m.s;x<m.i;x++)cls[x]+=' gl';cls[m.i]+=m.res==='r'?' miss':' hit'});
+  const P=$('#plate');P.className='plate'+(o?' ov':'');
+  P.innerHTML=Array.from({length:120},(_,x)=>{const c=cells[x];return c?`<div class="pc${cls[x]}" style="--c:${C[c][0]}">${c}</div>`:'<div class="pc e"></div>'}).join('');
+}
+function drawRank(){
+  const rows=(window._L||[]).filter(c=>c.on).map(c=>({id:c.id,name:c.name,pat:c.pattern,bet:c.bet,sc:c.sc})).sort((a,b)=>b.sc.score-a.sc.score);
+  if(!SEL||(SEL!=='draft'&&!rows.find(r=>r.id===SEL))){const b=rows.find(r=>r.sc.entries>=3)||rows[0];SEL=b?b.id:null}
+  if(LASTPREV&&st.pat.length)rows.unshift({id:'draft',name:'Padrão em construção',pat:st.pat,bet:st.bet,sc:LASTPREV.sc,draft:true});
+  let m=0;const med=['🥇','🥈','🥉'];
+  $('#rank').innerHTML=rows.length?rows.map(r=>{
+    const ok=!r.draft&&r.sc.entries>=3&&r.sc.score>0,md=ok&&m<3?med[m++]:(r.draft?'✏️':'·');
+    return `<div class="rk ${SEL===r.id?'on':''}" data-r="${r.id}"><div class="md">${md}</div>
+      <div><div class="mn">${r.pat.map(k=>dot(k)).join('')}<span style="color:var(--mute)">→</span>${betDot(r.bet)}<span class="nm">${r.name}</span></div>
+      <div class="sm">${r.sc.entries?`${r.sc.g+r.sc.t} green · ${r.sc.r} red · ${r.sc.entries} entradas na escala`:'não apareceu nas últimas 120 rodadas'}</div>
+      <div class="bar"><i style="width:${Math.min(100,r.sc.score)}%"></i></div></div>
+      <div class="pc2">${r.sc.hit==null?'—':r.sc.hit.toFixed(0)+'%'}<small>ajuste</small></div></div>`}).join(''):'<div class="empty">Salve um padrão para ver o ranking na escala.</div>';
+}
+$('#rank').onclick=e=>{const r=e.target.closest('.rk');if(r){SEL=r.dataset.r;drawPlate();drawRank()}};
+draw();load();setInterval(load,2500);
+</script>
+</body>
+</html>
